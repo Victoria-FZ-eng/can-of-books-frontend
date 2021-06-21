@@ -18,7 +18,9 @@ using React, Netifly, Auth0 Library
 ## Change Log
 
 20th June 2021 --> lab 11
+21th June 2021 --> lab 12
 
 ## Credit and Collaborations
 
-Got help from TAs , Yehya, Rana, Hana
+Got help from TAs , Yehya, Rana, Hana, Aisha.
+got help from collegues Ibrahim Derini and Ali Akef in lab 12
