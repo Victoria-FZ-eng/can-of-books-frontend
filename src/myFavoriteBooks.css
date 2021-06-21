@@ -1,3 +1,10 @@
 .jumbotron{
   margin-bottom: 0;
 }
+
+.books{
+  text-align: center;
+  font-weight: 500;
+  font-size:xx-large ;
+  color: aliceblue;
+}
