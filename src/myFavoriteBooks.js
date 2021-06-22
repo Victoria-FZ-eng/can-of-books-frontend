@@ -5,12 +5,16 @@ import './myFavoriteBooks.css';
 import BestBooks from './BestBooks';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
+import Button from 'react-bootstrap/Button';
+import BookForm from './BookFormModel';
 
 class MyFavoriteBooks extends React.Component {
   constructor(props){
     super(props);
     this.state={
       booksArr:[],
+      showForm: false,
+      showButton: true,
     }
   }
 
@@ -31,17 +35,64 @@ class MyFavoriteBooks extends React.Component {
     catch{
       console.log("error");
     }
+  }
+
+  getForm=(event)=>{
+    event.preventDefault();
+    this.setState({
+      showForm:true,
+      showButton: false,
+    })
+  }
+  addBook=(event)=>{
+    event.preventDefault();
+     
+    const bookData = {
+      name: event.target.name.value,
+      description: event.target.description.value,
+      status: event.target.status.value,
+      cover: event.target.cover.value
+    };
+
+    axios
+        .post(`${process.env.REACT_APP_BOOKS}/addBook`, bookData)
+        .then((newBook)=>{
+            this.setState({
+                booksArr: newBook.data,
+            })
+        }) 
+
+
 
   }
+  deleteBook=( index)=>{
+    // event.preventDefault();
+    const { user } = this.props.auth0;
+
+    axios
+        .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${index}`, {params: user.email})
+        .then((book)=>{
+          this.setState({
+            booksArr:book.data
+          })
+        })
+}
+  
+
   render() {
     return(
       <Jumbotron>
         <h1>My Favorite Books</h1>
+        {this.state.showButton && 
+        <Button variant="secondary" size="lg" block onClick={this.getForm}>
+           Verify Your Books
+        </Button>}
+        <BookForm show={this.state.showForm} addBook={this.addBook}/>
         <p>
           This is a collection of my favorite books
         </p>
         <p>{this.getBooks}</p>
-        <BestBooks arr={this.state.booksArr}/>
+        <BestBooks arr={this.state.booksArr} deleteBook={this.deleteBook}/>
       </Jumbotron>
     )
   }
