@@ -44,7 +44,7 @@ class MyFavoriteBooks extends React.Component {
       showButton: false,
     })
   }
-  addBook=(event)=>{
+  addBook=async (event)=>{
     event.preventDefault();
      
     const bookData = {
@@ -53,18 +53,27 @@ class MyFavoriteBooks extends React.Component {
       status: event.target.status.value,
       cover: event.target.cover.value
     };
+    console.log(bookData);
+   
+       let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, bookData);
+       console.log("newBook.data");
+       this.setState({
+        booksArr: newBook.data,
+        });
+        console.log(`ADD BOOK book data: ${this.state.booksArr}`);
 
-    axios
-        .post(`${process.env.REACT_APP_BOOKS}/addBook`, bookData)
-        .then((newBook)=>{
-            this.setState({
-                booksArr: newBook.data,
-            })
-        }) 
-
-
+        //  axios
+        // .post(`${process.env.REACT_APP_BOOKS}/addBook`,{params:bookData} )
+        // .then((newBook)=>{
+        //   console.log("newBook");
+        //     this.setState({
+        //         booksArr: newBook.data,
+        //     })
+        // }) 
+        
 
   }
+
   deleteBook=( index)=>{
     // event.preventDefault();
     const { user } = this.props.auth0;
