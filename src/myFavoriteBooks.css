@@ -4,7 +4,14 @@
 
 .books{
   text-align: center;
-  font-weight: 500;
-  font-size:xx-large ;
-  color: aliceblue;
+  font-weight: 350;
+  font-size: medium;
+  color: black;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.card{
+  margin: 1rem;
+ 
 }
