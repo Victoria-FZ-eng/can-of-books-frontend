@@ -61,8 +61,8 @@ class MyFavoriteBooks extends React.Component {
     // console.log(user.email);
     // console.log(bookData);
    
-      //  let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, {params: bookData});
-       let newBook =await axios.post(`http://localhost:3003/addBook`, bookData);
+       let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, bookData);
+      //  let newBook =await axios.post(`http://localhost:3003/addBook`, bookData);
        console.log(newBook.data);
        this.setState({
         booksArr: newBook.data,
@@ -98,8 +98,8 @@ class MyFavoriteBooks extends React.Component {
     })
 
     axios
- //       .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${id}`, newBooksArr)
-        .delete(`http://localhost:3003/deleteBook/${id}`, {params:{email}} )
+       .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${id}`, {params:{email}})
+        // .delete(`http://localhost:3003/deleteBook/${id}`, {params:{email}} )
         .then(()=>{
           this.setState({
             booksArr: newBooksArr,
