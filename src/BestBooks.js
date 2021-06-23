@@ -8,6 +8,9 @@ import Button from 'react-bootstrap/Button';
 
 class BestBooks extends React.Component{
 
+  
+  
+
     
     render(){
        
@@ -18,7 +21,7 @@ class BestBooks extends React.Component{
                    {this.props.arr
                    .map((book,idx)=>{
                        return(
-                    <Card style={{ width: '18rem' }} className="card">
+                    <Card style={{ width: '18rem' }} className="card" key={idx}>
                     <Card.Img variant="top" src={book.cover} alt="Cover Of Book" />
                  <Card.Body>
                    <Card.Title>{book.name}</Card.Title>
@@ -28,7 +31,7 @@ class BestBooks extends React.Component{
                     <Card.Text>
                   {book.status}
                     </Card.Text>
-                      <Button variant="secondary" onClick={this.props.deleteBook(idx)}>Delete</Button>
+                      <Button variant="secondary" value={idx} onClick={this.props.rmvBook}>Delete</Button>
                  </Card.Body>
                  </Card> );
 

@@ -15,6 +15,7 @@ class MyFavoriteBooks extends React.Component {
       booksArr:[],
       showForm: false,
       showButton: true,
+      
     }
   }
 
@@ -32,7 +33,8 @@ class MyFavoriteBooks extends React.Component {
        booksArr:booksData.data
      })
      
-     console.log(this.state.booksArr);}
+    // console.log(this.state.booksArr);
+  }
     catch{
       console.log("error");
     }
@@ -79,17 +81,31 @@ class MyFavoriteBooks extends React.Component {
 
   }
 
-  deleteBook=( index)=>{
-    // event.preventDefault();
-    // const { user } = this.props.auth0;
 
-    // axios
-    //     .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${index}`, {params: user.email})
-    //     .then((book)=>{
-    //       this.setState({
-    //         booksArr:book.data
-    //       })
-    //     })
+  deleteBook=(event)=>{
+    event.preventDefault();
+    const { user } = this.props.auth0;
+    
+    const id = this.state.booksArr[event.target.value]._id;
+    // console.log("delete");
+    let newBooksArr=this.state.booksArr.filter((book)=> book._id !== id);
+    console.log("delete");
+    console.log(newBooksArr);
+
+    const email= user.email;
+    this.setState({
+      booksArr:newBooksArr,
+    })
+
+    axios
+ //       .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${id}`, newBooksArr)
+        .delete(`http://localhost:3003/deleteBook/${id}`, {params:{email}} )
+        .then(()=>{
+          this.setState({
+            booksArr: newBooksArr,
+          });
+          console.log(this.state.booksArr);
+        })
 }
   
 
@@ -106,7 +122,7 @@ class MyFavoriteBooks extends React.Component {
           This is a collection of my favorite books
         </p>
         <p>{this.getBooks}</p>
-        <BestBooks arr={this.state.booksArr} deleteBook={this.deleteBook}/>
+        <BestBooks arr={this.state.booksArr} rmvBook={this.deleteBook}/>
       </Jumbotron>
     )
   }
