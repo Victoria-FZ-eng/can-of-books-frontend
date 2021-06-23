@@ -1,11 +1,11 @@
 # can-of-books-frontend
 
-**Author**: Victoria AbuZulof & Omar D'iab.
+**Author**: Victoria AbuZulof
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 
-We created w website where you have to log in (be authorized) before using it.
+We created w website where you have to log in (be authorized) before using it, view your fav book , add and delete books.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ using React, Netifly, Auth0 Library
 
 20th June 2021 --> lab 11
 21th June 2021 --> lab 12
-22th June 2021 --> lab 13
+22th& 23th June 2021 --> lab 13
 
 ## Credit and Collaborations
 
