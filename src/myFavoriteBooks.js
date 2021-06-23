@@ -25,6 +25,7 @@ class MyFavoriteBooks extends React.Component {
   getBooks =async()=>{
     const { user } = this.props.auth0;
     let booksURL = `${process.env.REACT_APP_BOOKS}/books?email=${user.email}`;
+    // let booksURL = `http://localhost:3003/books?email=${user.email}`;
      let booksData= await axios.get(booksURL);
      try{
      this.setState({
@@ -59,7 +60,7 @@ class MyFavoriteBooks extends React.Component {
     // console.log(bookData);
    
       //  let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, {params: bookData});
-       let newBook =await axios.post(`http://localhost:3003/addBook`, {params: bookData});
+       let newBook =await axios.post(`http://localhost:3003/addBook`, bookData);
        console.log(newBook.data);
        this.setState({
         booksArr: newBook.data,
