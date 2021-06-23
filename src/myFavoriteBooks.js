@@ -25,6 +25,7 @@ class MyFavoriteBooks extends React.Component {
   getBooks =async()=>{
     const { user } = this.props.auth0;
     let booksURL = `${process.env.REACT_APP_BOOKS}/books?email=${user.email}`;
+    // let booksURL = `http://localhost:3003/books?email=${user.email}`;
      let booksData= await axios.get(booksURL);
      try{
      this.setState({
@@ -46,24 +47,28 @@ class MyFavoriteBooks extends React.Component {
   }
   addBook=async (event)=>{
     event.preventDefault();
+    const { user } = this.props.auth0;
      
     const bookData = {
       name: event.target.name.value,
       description: event.target.description.value,
       status: event.target.status.value,
-      cover: event.target.cover.value
+      cover: event.target.cover.value,
+      email: user.email
     };
-    console.log(bookData);
+    // console.log(user.email);
+    // console.log(bookData);
    
-       let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, bookData);
-       console.log("newBook.data");
+      //  let newBook =await axios.post(`${process.env.REACT_APP_BOOKS}/addBook`, {params: bookData});
+       let newBook =await axios.post(`http://localhost:3003/addBook`, bookData);
+       console.log(newBook.data);
        this.setState({
         booksArr: newBook.data,
         });
         console.log(`ADD BOOK book data: ${this.state.booksArr}`);
 
         //  axios
-        // .post(`${process.env.REACT_APP_BOOKS}/addBook`,{params:bookData} )
+        // .post(`${process.env.REACT_APP_BOOKS}/books`,{params:bookData} )
         // .then((newBook)=>{
         //   console.log("newBook");
         //     this.setState({
@@ -76,15 +81,15 @@ class MyFavoriteBooks extends React.Component {
 
   deleteBook=( index)=>{
     // event.preventDefault();
-    const { user } = this.props.auth0;
+    // const { user } = this.props.auth0;
 
-    axios
-        .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${index}`, {params: user.email})
-        .then((book)=>{
-          this.setState({
-            booksArr:book.data
-          })
-        })
+    // axios
+    //     .delete(`${process.env.REACT_APP_BOOKS}/deleteBook/${index}`, {params: user.email})
+    //     .then((book)=>{
+    //       this.setState({
+    //         booksArr:book.data
+    //       })
+    //     })
 }
   
 
