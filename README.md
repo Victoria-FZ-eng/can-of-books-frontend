@@ -5,7 +5,7 @@
 
 ## Overview
 
-We created w website where you have to log in (be authorized) before using it, view your fav book , add and delete books.
+We created w website where you have to log in (be authorized) before using it, view your fav book , add ,update and delete books data.
 
 ## Getting Started
 
@@ -20,6 +20,7 @@ using React, Netifly, Auth0 Library
 20th June 2021 --> lab 11
 21th June 2021 --> lab 12
 22th& 23th June 2021 --> lab 13
+23th June 2021 --> lab 14
 
 ## Credit and Collaborations
 

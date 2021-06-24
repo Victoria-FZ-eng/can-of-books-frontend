@@ -6,9 +6,16 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 
 
+
 class BestBooks extends React.Component{
 
-  
+  constructor(props){
+    super(props);
+    this.state={
+      showUpForm: false,
+    }
+  }
+
   
 
     
@@ -31,13 +38,16 @@ class BestBooks extends React.Component{
                     <Card.Text>
                   {book.status}
                     </Card.Text>
-                      <Button variant="secondary" value={idx} onClick={this.props.rmvBook}>Delete</Button>
+                      <Button variant="secondary" value={idx} onClick={this.props.rmvBook} className="in">Delete</Button>
+                      
+                      <Button variant="secondary" value={idx} onClick={this.props.updBook} className="in">Update Data</Button>
                  </Card.Body>
                  </Card> );
 
                    })}
             
              </CardGroup>
+            
         </>
         // lab 12
             // <><Carousel fade  className="books">
