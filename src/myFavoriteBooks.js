@@ -7,6 +7,7 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import Button from 'react-bootstrap/Button';
 import BookForm from './BookFormModel';
+import UpdateBookForm from './UpdateBookForm';
 
 
 class MyFavoriteBooks extends React.Component {
@@ -15,7 +16,8 @@ class MyFavoriteBooks extends React.Component {
     this.state={
       booksArr:[],
       showForm: false,
-      showButton: true,
+      index: '',
+      
       
     }
   }
@@ -46,6 +48,7 @@ class MyFavoriteBooks extends React.Component {
     this.setState({
       showForm:true,
       showButton: false,
+      showUpForm:false,
     })
   }
   addBook=async (event)=>{
@@ -82,6 +85,13 @@ class MyFavoriteBooks extends React.Component {
 
   }
 
+  hideAddForm=(event)=>{
+    event.preventDefault();
+    this.setState({
+      showForm:false,
+    })
+  }
+
 
   deleteBook=(event)=>{
     event.preventDefault();
@@ -108,22 +118,66 @@ class MyFavoriteBooks extends React.Component {
           console.log(this.state.booksArr);
         })
 }
+
+selectUpdateBook=(event)=>{
+
+  console.log("from update function");
+  event.preventDefault();
+  this.setState({
+    showUpForm:true,
+    index: event.target.value,
+  })
+
+}
+
+closeUpForm=(event)=>{
+  event.preventDefault();
+  this.setState({
+    showUpForm:false,
+  })
+}
+
+updateBook=async(event)=>{
+  event.preventDefault();
+  const { user } = this.props.auth0;
+  const index= this.state.index
+  let updatedData={
+    name: event.target.name.value || this.state.booksArr[index].name,
+    description: event.target.description.value || this.state.booksArr[index].description,
+    cover: event.target.cover.value || this.state.booksArr[index].cover,
+    status:event.target.status.value || this.state.booksArr[index].status,
+    email:user.email
+  };
+  
+  // const id = this.state.booksArr[index]._id;
+  //  console.log(this.state.index);
+  // console.log (updatedData , id);
+  
+  // let updated = await axios.put(`http://localhost:3003/updateBook/${index}`, updatedData);
+  let updated = await axios.put(`${process.env.REACT_APP_BOOKS}/updateBook/${index}`, updatedData);
+  
+  this.setState({
+    booksArr:updated.data,
+  })
+       console.log(updated.data);
+}
   
 
   render() {
     return(
       <Jumbotron>
         <h1>My Favorite Books</h1>
-        {this.state.showButton && 
         <Button variant="secondary" size="lg" block onClick={this.getForm}>
            Verify Your Books
-        </Button>}
-        <BookForm show={this.state.showForm} addBook={this.addBook}/>
+        </Button>
+        <BookForm show={this.state.showForm} addBook={this.addBook} hide={this.hideAddForm}/>
         <p>
           This is a collection of my favorite books
         </p>
         <p>{this.getBooks}</p>
-        <BestBooks arr={this.state.booksArr} rmvBook={this.deleteBook}/>
+
+        <BestBooks arr={this.state.booksArr} rmvBook={this.deleteBook} updBook={this.selectUpdateBook}/>
+        <UpdateBookForm show={this.state.showUpForm} close={this.closeUpForm} update={this.updateBook}/>
       </Jumbotron>
     )
   }

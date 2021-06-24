@@ -7,30 +7,14 @@ import Form from 'react-bootstrap/Form';
 
 
 class BookForm extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            show:true,
-        }
-    }
-
-  
-
-    hideForm=(event)=>{
-        event.preventDefault();
-        this.setState({
-            show:false,
-        })
-    }
-
-
+   
     render(){
         return(
             <div>
                 <Modal
                 size="lg"
                   aria-labelledby="contained-modal-title-vcenter"
-                 centered show={this.props.show && this.state.show}>
+                 centered show={this.props.show}>
         <Modal.Header >
         <Modal.Title id="contained-modal-title-vcenter">
           Add Book to Your Collection
@@ -70,7 +54,7 @@ class BookForm extends React.Component{
        
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={this.hideForm}>Close</Button>
+        <Button onClick={this.props.hide}>Close</Button>
       </Modal.Footer>
     </Modal>
             </div>
