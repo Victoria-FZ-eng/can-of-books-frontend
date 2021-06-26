@@ -26,3 +26,10 @@ using React, Netifly, Auth0 Library
 
 Got help from TAs , Yehya, Rana, Hana, Aisha.
 got help from collegues Ibrahim Derini and Ali Akef in lab 12
+
+
+
+
+
+REACT_APP_DOMAIN=dev-a86q4akb.us.auth0.com
+REACT_APP_CLIENTID=qzxPw882C4e3SERqnHHK6QlQyNgCVJDR
